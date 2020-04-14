@@ -15,7 +15,7 @@ ARG DEBIAN_FRONTEND=noninteractive
 
 # Essentials: developer tools, build tools
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    apt-utils vim git \
+    apt-utils vim git gfortran \
     build-essential \
     ca-certificates
 
