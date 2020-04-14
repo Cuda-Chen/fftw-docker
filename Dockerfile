@@ -15,7 +15,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 RUN apt-get install -y --no-install-recommends \
     ocaml ocamlbuild autoconf automake indent libtool \
 # additional required packages when building under Ubuntu
-    ocaml-findlib fig2dev texinfo
+    ocaml-findlib fig2dev texinfo ghostscript
 
 # Ocaml Num library
 # Currently build from source because Ubuntu has this
