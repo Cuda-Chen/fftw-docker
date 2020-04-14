@@ -1,14 +1,6 @@
 FROM ubuntu:18.04
 MAINTAINER Cuda Chen <clh960524@gmail.com>
 
-# Suggested by https://vsupalov.com/docker-shared-permissions/
-# to avoid permission problem
-ARG USER_ID
-ARG GROUP_ID
-RUN addgroup --gid $GROUP_ID user
-RUN adduser --disabled-password --gecos '' --uid $USER_ID --gid $GROUP_ID user
-USER user
-
 # Supress warnings about missing front-end. As recommended at:
 # http://stackoverflow.com/questions/22466255/is-it-possibe-to-answer-dialog-questions-when-installing-under-docker
 ARG DEBIAN_FRONTEND=noninteractive
@@ -40,5 +32,6 @@ RUN git clone https://github.com/ocaml/num.git /usr/local/src/ocaml_num && \
 RUN git clone https://github.com/FFTW/fftw3.git /usr/local/src/fftw3 && \
     cd /usr/local/src/fftw3 && \
     sh bootstrap.sh && \
-    make && \
-    make install
+    make -j`nproc` && \
+    make install && \
+    make clean
