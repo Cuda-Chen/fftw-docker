@@ -14,11 +14,11 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 # FFTW Required Packages when building from scratch
 RUN apt-get install -y --no-install-recommends \
     ocaml ocamlbuild autoconf automake indent libtool \
-# additional required packages when building under Ubuntu
+# additional required packages when building under Ubuntu Docker
     ocaml-findlib fig2dev texinfo ghostscript
 
 # Ocaml Num library
-# Currently build from source because Ubuntu has this
+# Currently build from source because Ubuntu Docker doesn't have this
 # package until version 20.04.
 RUN git clone https://github.com/ocaml/num.git /usr/local/src/ocaml_num && \
     cd /usr/local/src/ocaml_num && \
@@ -28,7 +28,7 @@ RUN git clone https://github.com/ocaml/num.git /usr/local/src/ocaml_num && \
     make clean
 
 # Get FFTW source code from GitHub
-# and compile FFTW from scratch.
+# and compile FFTW from scratch configure in double-precision.
 RUN git clone https://github.com/FFTW/fftw3.git /usr/local/src/fftw3 && \
     cd /usr/local/src/fftw3 && \
     sh bootstrap.sh && \
